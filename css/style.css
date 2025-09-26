@@ -1,0 +1,642 @@
+:root {
+    --color-bg: #fafafa;
+    --color-surface: #ffffff;
+    --color-border: #e5e7eb;
+    --color-text: #1f2937;
+    --color-text-muted: #6b7280;
+    --color-accent: #2563eb;
+    --color-accent-hover: #1d4ed8;
+    --color-accent-soft: #eff6ff;
+    --radius: 12px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+    --transition: .25s ease;
+    --nav-height: 60px;
+}
+
+/* 強制所有可點擊元素顯示手形 cursor */
+button, 
+.btn, 
+.btn-primary,
+.btn-secondary,
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-ghost,
+.btn-sm,
+select, 
+.form-select,
+input[type="button"],
+input[type="submit"],
+[onclick],
+[role="button"],
+.quiz-buttons button,
+.toolbar-group button,
+.manage-buttons button {
+    cursor: pointer !important;
+}
+
+button:hover, 
+.btn:hover, 
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover,
+.btn-ghost:hover,
+.btn-sm:hover,
+select:hover, 
+.form-select:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+[onclick]:hover,
+[role="button"]:hover,
+.quiz-buttons button:hover,
+.toolbar-group button:hover,
+.manage-buttons button:hover {
+    cursor: pointer !important;
+}
+
+/* 確保所有按鈕相關的樣式都有手形 */
+* button,
+* .btn,
+* select,
+* .form-select {
+    cursor: pointer !important;
+}
+
+body.dark-theme {
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-border: #334155;
+    --color-text: #e2e8f0;
+    --color-text-muted: #94a3b8;
+    --color-accent: #3b82f6;
+    --color-accent-soft: rgba(59,130,246,0.15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+    transition: background var(--transition), color var(--transition);
+}
+
+.app-navbar {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--nav-height);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--color-accent)!important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--color-text)!important;
+    font-weight: 500;
+    padding: 0.5rem 1rem!important;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    background: var(--color-accent-soft);
+    color: var(--color-accent)!important;
+}
+
+.container {
+    padding-top: calc(var(--nav-height) + 2rem);
+    padding-bottom: 2rem;
+    min-height: 100vh;
+}
+
+.btn {
+    border-radius: var(--radius);
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    transition: all var(--transition);
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 100 !important;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--color-accent-hover);
+    color: white;
+}
+
+.btn-light {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.btn-light:hover {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.btn-ghost:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.flashcard {
+    width: 300px;
+    height: 400px;
+    perspective: 1200px;
+    margin: 1.5rem auto 2rem;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: transform 0.2s ease;
+    display: block;
+}
+
+.flashcard:hover {
+    transform: translateY(-2px);
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.42s ease;
+    transform-style: preserve-3d;
+}
+
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, 
+.flashcard-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    border-radius: 16px;
+    background: var(--color-surface);
+    border: 3px solid var(--color-accent);
+    backface-visibility: hidden;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    transition: all 0.3s ease;
+    overflow: visible;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.flashcard:hover .flashcard-front,
+.flashcard:hover .flashcard-back {
+    border-color: var(--color-accent-hover);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+}
+
+.flashcard-front {
+    z-index: 2;
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+}
+
+.card-main-text {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: var(--color-text);
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: block;
+}
+
+.pronounce {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    font-style: italic;
+    text-align: center;
+    word-wrap: break-word;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: block;
+}
+
+.flip-hint {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    padding: 0.25rem 0.6rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+.flashcard:hover .flip-hint {
+    opacity: 1;
+}
+
+.example-text {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    max-width: 90%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.card-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 5;
+}
+
+.card-controls .btn {
+    min-width: 80px;
+    flex-shrink: 0;
+    pointer-events: auto;
+    z-index: 100;
+    position: relative;
+}
+
+.chip {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.action-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.theme-toggle-btn {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+}
+
+.theme-toggle-btn:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+}
+
+.toolbar-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.toolbar-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.content-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.primary-area {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.side-area {
+    width: 340px;
+    flex: 0 0 auto;
+}
+
+body.dark-theme .app-navbar {
+    background: rgba(30,41,59,0.85);
+    border-color: var(--color-border);
+}
+
+body.dark-theme .flashcard-front,
+body.dark-theme .flashcard-back {
+    background: var(--color-surface);
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+body.dark-theme .flashcard:hover .flashcard-front,
+body.dark-theme .flashcard:hover .flashcard-back {
+    border-color: var(--color-accent-hover);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+@media (max-width: 900px) {
+    .content-layout {
+        flex-direction: column;
+    }
+    .side-area {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: calc(var(--nav-height) + 1rem);
+    }
+    
+    .flashcard {
+        width: 260px !important;
+        max-width: 260px !important;
+        min-width: 260px !important;
+        height: 340px !important;
+        min-height: 340px !important;
+        margin: 1rem auto 1.5rem;
+    }
+    
+    .flashcard-front,
+    .flashcard-back {
+        padding: 1.5rem 0.8rem;
+    }
+    
+    .card-main-text {
+        font-size: 1.3rem;
+    }
+    
+    .action-toolbar {
+        justify-content: stretch;
+    }
+    
+    .action-toolbar .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 576px) {
+    .flashcard {
+        width: 240px;
+        height: 320px;
+    }
+    
+    .flashcard-front,
+    .flashcard-back {
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .card-main-text {
+        font-size: 1.1rem;
+    }
+}
+
+.text-center { text-align: center; }
+.text-muted { color: var(--color-text-muted); }
+.mb-3 { margin-bottom: 1rem; }
+.d-flex { display: flex; }
+.justify-content-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+
+/* 確保下拉選單和按鈕可以正常點擊 */
+.form-select {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 100 !important;
+    position: relative !important;
+}
+
+.toolbar-group {
+    z-index: 100 !important;
+    position: relative !important;
+}
+
+.toolbar-group .btn {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 101 !important;
+}
+
+.quiz-buttons {
+    z-index: 100 !important;
+    position: relative !important;
+}
+
+.quiz-buttons .btn {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 101 !important;
+}
+
+/* 強制所有按鈕和選單可點擊 */
+button, select, .btn, .form-select {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+button:hover, select:hover, .btn:hover, .form-select:hover {
+    cursor: pointer !important;
+}
+
+/* 確保沒有元素阻擋點擊 */
+.toolbar-line {
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+.toolbar-line * {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* 學習進度頁面樣式 */
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-item {
+    background: var(--color-surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.progress-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.mini-progress-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.mini-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.mini-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mini-bar-wrapper {
+    height: 8px;
+    background: var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.mini-bar {
+    height: 100%;
+    background: var(--color-accent);
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.mini-bar.alt {
+    background: var(--color-success);
+}
+
+.mini-value {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    min-width: 35px;
+    text-align: right;
+}
+
+.management-panel {
+    grid-column: 1 / -1;
+}
+
+.manage-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.chip.overall {
+    background: var(--color-accent);
+    color: white;
+}
+
+.chip.alt {
+    background: var(--color-success);
+    color: white;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .progress-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stats-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .mini-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}

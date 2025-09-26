@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>越南語學習工具</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 緊急修復：強制所有按鈕和可點擊元素顯示手形cursor */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* 使用更高優先級的CSS選擇器 */
+        html body button,
+        html body .btn,
+        html body .btn-primary,
+        html body .btn-secondary,
+        html body .btn-outline-primary,
+        html body .btn-outline-secondary,
+        html body .btn-ghost,
+        html body .btn-sm,
+        html body .btn-outline-danger,
+        html body .btn-success,
+        html body .btn-info,
+        html body select,
+        html body .form-select,
+        html body input[type="button"],
+        html body input[type="submit"],
+        html body [onclick],
+        html body .nav-link,
+        html body .navbar-toggler,
+        html body [role="button"],
+        html body .clickable,
+        html body .quiz-buttons button,
+        html body .toolbar-group button,
+        html body .manage-buttons button,
+        html body .practice-buttons button,
+        html body .speaking-buttons button,
+        html body .card-controls button {
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+        
+        /* 特別針對Bootstrap按鈕 */
+        .btn.btn-primary,
+        .btn.btn-secondary,
+        .btn.btn-outline-primary,
+        .btn.btn-outline-secondary,
+        .btn.btn-ghost,
+        .btn.btn-sm {
+            cursor: pointer !important;
+        }
+        
+        /* 禁用可能干擾的樣式 */
+        button:disabled,
+        .btn:disabled {
+            cursor: not-allowed !important;
+        }
+        
+        /* 強制覆蓋任何Bootstrap樣式 */
+        .bootstrap-override {
+            cursor: pointer !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg app-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">越南語學習工具</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="vocabulary">單字學習</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="sentences">句子練習</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="grammar">文法學習</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="speaking">口語練習</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="progress">學習進度</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="content">內容管理</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <button id="themeToggleBtn" type="button" class="btn btn-sm btn-outline-secondary theme-toggle-btn" aria-label="切換主題" title="切換主題">🌙</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container container-narrow">
+        <div id="mainContent" class="page-root"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/speech.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/content-manager.js"></script>
+    <script src="js/content-editor.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
