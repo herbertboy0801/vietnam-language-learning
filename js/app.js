@@ -22,7 +22,10 @@ class VietnamLanguageLearning {
             this.updateNavOffset();
             window.addEventListener('resize', () => this.updateNavOffset());
             // 延遲載入首頁，避免初始化競爭
-            setTimeout(() => this.loadPage('vocabulary'), 100);
+            setTimeout(() => {
+                this.loadPage('vocabulary');
+                this.showWelcomeGreeting();
+            }, 100);
         } catch (error) {
             console.error('應用程式初始化失敗:', error);
             document.getElementById('mainContent').innerHTML = `
@@ -1313,6 +1316,57 @@ class VietnamLanguageLearning {
         // 如果在句子學習頁面，重新載入
         if (this.currentPage === 'sentences') {
             this.loadSentencesPage();
+        }
+    }
+
+    // 顯示歡迎問候
+    showWelcomeGreeting() {
+        // 創建歡迎訊息的 toast 通知
+        const welcomeToast = document.createElement('div');
+        welcomeToast.id = 'welcomeToast';
+        welcomeToast.className = 'toast-notification welcome-toast';
+        welcomeToast.innerHTML = `
+            <div class="toast-content">
+                <div class="toast-header">
+                    <strong>🇻🇳 Xin chào!</strong>
+                    <button class="toast-close" onclick="this.parentElement.parentElement.parentElement.remove()">&times;</button>
+                </div>
+                <div class="toast-body">
+                    <div class="greeting-text">
+                        <div class="vietnamese">Chào mừng bạn đến với công cụ học tiếng Việt!</div>
+                        <div class="pronunciation">chao mung ban den voi cong cu hoc tieng viet</div>
+                        <div class="chinese">歡迎使用越南語學習工具！</div>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" onclick="app.playWelcomeAudio()">🔊 播放發音</button>
+                </div>
+            </div>
+        `;
+
+        // 添加到頁面
+        document.body.appendChild(welcomeToast);
+
+        // 顯示動畫
+        setTimeout(() => {
+            welcomeToast.classList.add('show');
+        }, 500);
+
+        // 5秒後自動隱藏
+        setTimeout(() => {
+            if (welcomeToast.parentNode) {
+                welcomeToast.classList.remove('show');
+                setTimeout(() => {
+                    if (welcomeToast.parentNode) {
+                        welcomeToast.remove();
+                    }
+                }, 300);
+            }
+        }, 5000);
+    }
+
+    // 播放歡迎語音
+    playWelcomeAudio() {
+        if (speechManager && speechManager.speak) {
+            speechManager.speak('Chào mừng bạn đến với công cụ học tiếng Việt');
         }
     }
 }
